@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:latest
+    environment:
+      - MYSQL_USER=springuser
+      - MYSQL_DATABASE=parking_db
+      - MYSQL_PASSWORD=ThePassword
+      - MYSQL_ROOT_PASSWORD=changeme
+    ports: 
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+  springapp:
+    depends_on:
+      - mysqldb
+    build: .
+    image: dhorram/spring-app
+    ports: 
+      - '8080:8080'
+    volumes:
+      - ./target:/app
+volumes:
+  db:
+

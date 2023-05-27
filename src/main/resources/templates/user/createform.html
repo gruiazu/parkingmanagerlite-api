@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <title>Crear nuevo usuario</title>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a id="to-home-link" class="navbar-item" href="/">
+          <img
+            src="https://bulma.io/images/bulma-logo.png"
+            width="112"
+            height="28"
+          />
+        </a>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a id="to-users-link" href="/users" class="navbar-item">
+              Usuarios
+            </a>
+            <a id="to-draws-link" href="/draws" class="navbar-item">Sorteos</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <h1 id="user-form-title" class="title is-1">Crear nuevo usuario</h1>
+    <div class="column is-half is-offset-one-quarter">
+    <form
+      th:action="@{/newUser}"
+      th:object="${userDao}"
+      action="#"
+      method="post"
+    >
+      <div th:if="${#fields.hasErrors('*')}">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}" class="notification is-danger"></p>
+      </div>
+      <div class="field">
+        <label id="user-create-label-email" class="label"
+          >Correo electrónico</label
+        >
+        <div class="control">
+          <input
+            id="user-create-field-email"
+            th:field="*{email}"
+            type="email"
+            placeholder="persona@dominio"
+            class="input"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label id="user-create-label-name" class="label">Nombre</label>
+        <div class="control">
+          <input
+            id="user-create-field-name"
+            th:field="*{name}"
+            type="text"
+            placeholder="John"
+            class="input"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label id="user-create-label-lastname1" class="label"
+          >Primer Apellido</label
+        >
+        <div class="control">
+          <input
+            id="user-create-field-lastname1"
+            th:field="*{lastName1}"
+            type="text"
+            placeholder="Doe"
+            class="input"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label id="user-create-label-lastname2" class="label"
+          >Segundo Apellido</label
+        >
+        <div class="control">
+          <input
+            id="user-create-field-lastname2"
+            th:field="*{lastName2}"
+            type="text"
+            placeholder="Mc Allister"
+            class="input"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Rol</label>
+        <div class="control">
+      <select id="user-create-field-role"th:field="*{role}" class="select">
+        <option
+          th:each="role: ${roles}"
+          th:value="${role}"
+          th:text="${role.getDisplayName()}"
+        ></option>
+      </select>
+        </div>
+      </div>
+      <button id="user-create-button-submit" type="submit" class="button is-primary">Crear</button>
+    </form>
+</div>
+  </body>
+</html>

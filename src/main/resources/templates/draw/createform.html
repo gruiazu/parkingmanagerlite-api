@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <title>Crear nuevo sorteo</title>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a id="to-home-link" class="navbar-item" href="/">
+          <img
+            src="https://bulma.io/images/bulma-logo.png"
+            width="112"
+            height="28"
+          />
+        </a>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a id="to-users-link" href="/users" class="navbar-item"> Usuarios </a>
+            <a id="to-draws-link" href="/draws" class="navbar-item">Sorteos</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+<div class="column is-half is-offset-one-quarter">
+    <form th:action="@{/newDraw}" th:object="${drawDao}"action="#" method="post">
+        <div class="field">
+            <label id="draw-label-description" class="label">Descripción</label>
+            <div class="control">
+                <input id="draw-field-description" th:field="*{description}" type="text" placeholder="Descripción" class="input">
+            </div>
+          </div>
+        
+        <button id="draw-button-submit" type="submit" class="button is-primary">Crear</button> 
+
+    </form>
+    </div>
+</body>
+</html>
